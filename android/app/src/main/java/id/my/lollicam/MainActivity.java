@@ -10,6 +10,7 @@ import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.os.Build;
 import android.os.PowerManager;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -72,7 +73,8 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Ca
     private int dp(int n) { return Math.round(n * getResources().getDisplayMetrics().density); }
 
     private void startStreaming() {
-        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION); return;
         }
         String server = serverInput.getText().toString().trim().replaceAll("/+$", "");
