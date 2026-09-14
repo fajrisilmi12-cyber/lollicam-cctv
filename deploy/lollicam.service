@@ -5,8 +5,8 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-User=nobody
-Group=nobody
+User=lollicam
+Group=lollicam
 WorkingDirectory=/opt/lollicam
 ExecStart=/usr/bin/node /opt/lollicam/server.js
 Restart=on-failure
