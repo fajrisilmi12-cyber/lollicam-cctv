@@ -1,0 +1,21 @@
+[Unit]
+Description=LolliCam lightweight CCTV relay
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=nobody
+Group=nobody
+WorkingDirectory=/opt/lollicam
+ExecStart=/usr/bin/node /opt/lollicam/server.js
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+MemoryMax=96M
+
+[Install]
+WantedBy=multi-user.target
