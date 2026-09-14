@@ -12,10 +12,13 @@ MJPEG. Server hanya menyimpan frame terakhir di RAM dan tidak merekam ke disk.
 
 ## 1. Pasang server di Arch Linux
 
-Pastikan Node.js tersedia (`pacman -S nodejs`). Salin folder `server` ke
-`/opt/lollicam`, lalu:
+Pastikan Node.js tersedia (`pacman -S nodejs`). Buat akun layanan, lalu salin
+folder `server` ke `/opt/lollicam`:
 
 ```bash
+useradd --system --home-dir /opt/lollicam --shell /usr/bin/nologin lollicam
+mkdir -p /opt/lollicam
+cp -r /lokasi/LolliCam/server/. /opt/lollicam/
 cd /opt/lollicam
 cp .env.example .env
 node make-tokens.js
@@ -24,6 +27,7 @@ node make-tokens.js
 Salin dua token yang dihasilkan ke `.env`. Lindungi file tersebut:
 
 ```bash
+chown -R lollicam:lollicam /opt/lollicam
 chmod 600 /opt/lollicam/.env
 cp /lokasi/LolliCam/deploy/lollicam.service /etc/systemd/system/
 systemctl daemon-reload
